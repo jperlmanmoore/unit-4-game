@@ -2,13 +2,17 @@
 $(document).ready(function() {
                     });
 
+var attackPower = 0;
+var healthPoints = 0;
+var counterAttackPower = 0;
+
 
 //
-var game = {
+var game = {                    //characters are objects
     characters: {
         "Leia": {
             name:   "Leia",
-            image: "leia.jpg", //check how to
+            image: "leia.jpg",  //check how to write
             attackPower:   1,
             healthPoints:  1,
             counterAttackPower: 1,
