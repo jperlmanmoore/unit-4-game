@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Star Wars</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+        integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -24,72 +24,70 @@
 
     <div class="jumbotron jumbotron-fluid bg-dark">
         <div class="container">
-            <h1 class="display-1 text-center text-warning" style="font-family:'Luckiest Guy', cursive;">STAR WARS RPG</h1>
-            <p class="lead text-white" style="font-family: 'Open Sans Condensed', sans-serif;">"Help me, Obi-Wan Kenobi. You’re my only hope.” — Leia Organa - “I find your lack of faith
-                disturbing.” — Darth Vader -
-                “Fear is the path to the dark side. Fear leads to anger; anger leads to hate; hate leads to suffering.
-                I sense much fear in you.” — Yoda
-                - “Well, if droids could think, there’d be none of us here, would there?” — Obi-Wan Kenobi - “The
-                garbage’ll do!” — Rey - “Oh, my dear friend. How I’ve missed you.” — C-3PO
-            </p>
+            <h1 class="display-1 text-center text-warning" style="font-family:'Luckiest Guy', cursive;">STAR WARS RPG
+            </h1>
+            <p class="lead text-white" style="font-family: 'Open Sans Condensed', sans-serif;">“The garbage’ll do!” — Rey</p>
+            
         </div>
     </div>
 
     <div class="container" id="board">
-        <div class="card-deck">
-            <div style="font-family: 'Open Sans Condensed', sans-serif;">Pick your character</div>
-            <div class="card leia" style="width: 18rem;">
-                <img class="card-img-top" src="assets/images/leia.jpg" alt="Card image cap">
+
+        <div class="card-deck" id="pickUserCharArray">
+            <div class="card" id="leia" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/leia2.jpg" alt="leia">
                 <div class="card-body">
-                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Princess Leia</p>
+                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Princess
+                        Leia</p>
                 </div>
             </div>
-            <div class="card maul" style="width: 18rem;">
-                <img class="card-img-top" src="assets/images/maul.jpg" alt="Card image cap">
+
+            <div class="card" id="vader" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/vader2.jpg" alt="vader">
                 <div class="card-body">
-                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Darth Maul</p>
+                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Darth Maul
+                    </p>
                 </div>
             </div>
-            <div class="card trooper" style="width: 18rem;">
-                <img class="card-img-top" src="assets/images/trooper.jpg" alt="Card image cap">
+
+            <div class="card" id="trooper" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/trooper.jpg" alt="trooper">
                 <div class="card-body">
-                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Storm Trooper</p>
+                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Storm
+                        Trooper</p>
                 </div>
             </div>
-            <div class="card kylo" style="width: 18rem;">
-                <img class="card-img-top" src="assets/images/kylo.jpg" alt="Card image cap">
+
+            <div class="card" id="kylo" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/kylo.jpg" alt="kylo">
                 <div class="card-body">
-                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Kylo Ren</p>
+                    <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">Kylo Ren
+                    </p>
                 </div>
             </div>
+
         </div>
-    </div>
 
-    <br>
-    <hr>
+        <br>
+        <hr>
 
-    <div class="card-deck">
-        <div class="container" style="font-family: 'Open Sans Condensed', sans-serif;">
-            <div class="card-deck">
-                <div>Pick your opponent</div>
-            </div>
+        <div class="card-deck" id="pickOpponentChar">
+            <!--<div class="container" style="font-family: 'Open Sans Condensed', sans-serif;"> Pick you opponent</div>-->
+            <div class="card blank" style="width: 18rem;"></div>
+            <div class="card blank" style="width: 18rem;"></div>
+            <div class="card blank" style="width: 18rem;"></div>
         </div>
-    </div>
-    </div>
 
-    <br>
-    <hr>
 
-    <div class="card-deck">
-        <div class="container" style="font-family: 'Open Sans Condensed', sans-serif;">
-            <div class="card-deck">
-                <div>Opponent</div>
-            </div>
+        <br>
+        <hr>
+
+        <div class="card-deck" id="opponentChar">
+            <!--<div class="container" style="font-family: 'Open Sans Condensed', sans-serif;">Opponent</div>-->
+            <div class="card blank" style="width: 18rem;"></div>
         </div>
-    </div>
-    </div>
 
-    <!--need 
+        <!--need 
     -container for start
         - pick character
         - pick enemy
@@ -105,9 +103,11 @@
 
 -->
 
-    <script src=“http://code.jquery.com/jquery-3.3.1.min.js” integrity=“sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=”
-        crossorigin=“anonymous”></script>
-    <script src="assets/javascript/game.js"></script>
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+           
+        <script src = "assets/javascript/game.js"></script>
+        
+    </div>
 </body>
 
 </html>
