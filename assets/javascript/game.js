@@ -9,66 +9,107 @@
 //9. restart game
 
 $(document).ready(function () {
-    $("#leia").on("click", function () {
-        console.log("Leia was clicked!");
-    });
-    
-    $("#vader").on("click", function () {
-        console.log("Maul was clicked!");
-    });
-    
-    $("#trooper").on("click", function () {
-        console.log("trooper was clicked!");
-    });
-    
-    $("#kylo").on("click", function () {
-        console.log("kylo was clicked!");
-    });
-});
 
-var attackPower = 0;
-var healthPoints = 0;
-var counterAttackPower = 0;
-var charachterArray = []; //at start list all characters & leave user choice here
-var opponentChoiceArray = []; //move unpicked characters here
-var currentOpponentArray = []; //move picked opponent here
-
-
-var charachters = [
-    "#leia", {
-        //name:   "Leia"
+    var leia = {
+        name: "#leia",
         attackPower: 5,
         healthPoints: 200,
         counterAttackPower: 30,
-    },
+    }
 
-    "#vader", {
-        //name: "Darth Vader"
+    var vader = {
+        name: "#vader",
         attackPower: 10,
         healthPoints: 200,
         counterAttackPower: 10,
-    },
+    }
 
-    "#trooper", {
-        //name: "Storm Trooper"
+    var trooper = {
+        name: "#trooper",
         attackPower: 10,
         healthPoints: 200,
         counterAttackPower: 30,
-    },
+    }
 
-    "#kylo", {
-        //name: "Kylo Ren"
+    var kylo = {
+        name: "#kylo",
         attackPower: 5,
         healthPoints: 200,
         counterAttackPower: 20,
-    },
-]
+    };
+
+    var charArray = [leia, vader, trooper, kylo];
+
+    // $("#characters").prepend("<div id='pickInst'>Pick character</div>");
+    // $("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
+
+    // $("#pickOpponentChar").prepend("<div id='pickInst2'>Pick opponent</div>");
+    // $("#pickInst2").css("font-family", 'Open Sans Condensed', 'sans-serif');
+
+    // $("#opponentChar").prepend("<div id='opponent'>Opponent</div>");
+    // $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
 
-var opponentChoiceArray = 
+    $("#characters .playerCharacter").click(function () {
+       $("#characters .playerCharacter").not(this).appendTo($("#pickOpponentChar"));
+       $("#characters .playerCharacter").not(this).removeClass("playerCharacter");
+       console.log( $("#characters .playerCharacter").not(this))
+    }); 
 
-$("pickUserCharArray").splice("1, 2, 3");
-$("pickOpponentChar").add("pickUserCharArray");
+    $("#pickOpponentCard .charactercard").click(function () {
+        $(this).appendTo($("#opponentChar"));
+    }); 
+
+     
+
+    // $("#leia").on("click", function () {
+    //     console.log("Leia was clicked!");
+    // });
+
+    // $("#vader").on("click", function () {
+    //     console.log("Maul was clicked!");
+    // });
+
+    // $("#trooper").on("click", function () {
+    //     console.log("trooper was clicked!");
+    // });
+
+    // $("#kylo").on("click", function () {
+    //     console.log("kylo was clicked!");
+    // });
+
+    
+
+});
+
+
+
+
+
+// var myDiv2Para = $('#myDiv2>p').detach();
+// myDiv2Para.appendTo('#myDiv2');
+
+
+
+
+
+// $(".charactercard").click(function() {
+//     $(".charactercard").not(this).detatch;
+//     $(this).append(pickOpponentCharArray);
+//     })
+
+// var attackPower = 0;
+// var healthPoints = 0;
+// var counterAttackPower = 0;
+// var userChar = []; //put the user choice in this array
+
+
+
+
+
+
+
+
 
 
 // var selectedElements = [1,2,3,4,5].splice(0,2);  in javascript
@@ -76,17 +117,6 @@ $("pickOpponentChar").add("pickUserCharArray");
 
 
 
-
-
-
-$("#pickUserCharArray").prepend("<div id='pickInst'>Pick character</div>");
-$("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
-
-$("#pickOpponentChar").prepend("<div id='pickInst2'>Pick opponent</div>");
-$("#pickInst2").css("font-family", 'Open Sans Condensed', 'sans-serif');
-
-$("#opponentChar").prepend("<div id='opponent'>Opponent</div>");
-$("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
 
 // $("pickUserChar").click(function() {
