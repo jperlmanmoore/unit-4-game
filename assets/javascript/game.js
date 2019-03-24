@@ -16,29 +16,29 @@ $(document).ready(function () {
         attackPower: 8,
         healthPoints: 120,
         counterAttackPower: 15,
-    },
+        },
 
     "vader": {
         name: "vader",
         attackPower: 14,
         healthPoints: 100,
         counterAttackPower: 5,
-    },
+        },
 
     "trooper": {
         name: "trooper",
         attackPower: 8,
         healthPoints: 150,
         counterAttackPower: 20,
-    },
+        },
 
     "kylo": {
         name: "kylo",
         attackPower: 7,
         healthPoints: 180,
         counterAttackPower: 20,
-    }
-};
+        }
+    };
 
     $("#characters").prepend("<div id='pickInst'>Pick character</div>");
     $("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
@@ -50,21 +50,45 @@ $(document).ready(function () {
     $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
 
+    var characterObj;
+    var opponentObj;
+
+    var fightRound = 1;
+
     //pick player character & move other characters to pick opponent deck
     $("#characters").on("click", ".playerCharacter", function () {
         $(this).removeClass("playerCharacter").addClass("userChoice");
         $(".playerCharacter").not(this).appendTo($("#pickOpponentChar"));
         $(".playerCharacter").not(this).removeClass("playerCharacter").addClass("pickOpponentChar");
+        $("#characters").append("<button id='fight' class='ml-3' style='height: 50px; width: 50px; font-size: 20px'>Fight!</button>");
+        $("#fight").css("font-family", 'Open Sans Condensed', 'sans-serif');
+        var userChoiceId = $(this).attr("id");
+        characterObj = characters[userChoiceId];
+        $("#characters").append("<div id='userStats' class='ml-3' font-size: 30px'> <p>Attack Power: "+characterObj.attackPower+"</p> <p>Health Points: " +characterObj.healthPoints+ "</p> </div>");
+        $("#userStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    });
 
+    $("#characters").on("click", "#fight", function () {
+        
+       opponentObj.healthPoints = opponentObj.healthPoints - characterObj.attackPower;
+       characterObj.healthPoints = characterObj.healthPoints - opponentObj.counterAttackPower;
+       $("#userStats").html("<p>Attack Power: "+characterObj.attackPower+"</p> <p>Health Points: " +characterObj.healthPoints+ "</p>");
+       $("opponentStats").html("<p>Health Points: " +opponentObj.healthPoints+ "</p> <p>Counter Attack Power: "+opponentObj.counterAttackPower+"</p>");
+       fightRound++;
+       characterObj.attackPower = characterObj.attackPower * 2;
     });
 
     //pick opponent and move that to the opppnent player deck & leave other possible opponents for later choice
     $("#pickOpponentChar").on("click", ".pickOpponentChar", function () {
         $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));
+        var userChoiceId = $(this).attr("id");
+        opponentObj = characters[userChoiceId];
+        $("#opponentChar").append("<div id='opponentStats' class='ml-3' font-size: 30px'> <p>Health Points: " +opponentObj.healthPoints+ "</p> <p>Counter Attack Power: "+opponentObj.counterAttackPower+"</p> </div>");
+        $("#opponentStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
     });
 
 
-    //give players their stats at start
+    
     //if there is a userChoice and an opponentChar, then need them to fight,
     //if userChoice is not defeated, then
     //1x or 2x - when that fight is done pick a new opponentChar, then need them to fight,
