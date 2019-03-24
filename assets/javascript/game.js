@@ -10,35 +10,35 @@
 
 $(document).ready(function () {
 
-    var leia = {
-        name: "#leia",
-        attackPower: 5,
-        healthPoints: 200,
-        counterAttackPower: 30,
-    }
+    let characters = {
+    "leia": {
+        name: "leia",
+        attackPower: 8,
+        healthPoints: 120,
+        counterAttackPower: 15,
+    },
 
-    var vader = {
-        name: "#vader",
-        attackPower: 10,
-        healthPoints: 200,
-        counterAttackPower: 10,
-    }
+    "vader": {
+        name: "vader",
+        attackPower: 14,
+        healthPoints: 100,
+        counterAttackPower: 5,
+    },
 
-    var trooper = {
-        name: "#trooper",
-        attackPower: 10,
-        healthPoints: 200,
-        counterAttackPower: 30,
-    }
-
-    var kylo = {
-        name: "#kylo",
-        attackPower: 5,
-        healthPoints: 200,
+    "trooper": {
+        name: "trooper",
+        attackPower: 8,
+        healthPoints: 150,
         counterAttackPower: 20,
-    };
+    },
 
-    var charArray = [leia, vader, trooper, kylo];
+    "kylo": {
+        name: "kylo",
+        attackPower: 7,
+        healthPoints: 180,
+        counterAttackPower: 20,
+    }
+};
 
     $("#characters").prepend("<div id='pickInst'>Pick character</div>");
     $("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
@@ -50,23 +50,17 @@ $(document).ready(function () {
     $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
 
-//    $(".playerCharacter").on("click", function () {
+    //pick player character & move other characters to pick opponent deck
     $("#characters").on("click", ".playerCharacter", function () {
-       $(this).removeClass("playerCharacter").addClass("userChoice");
+        $(this).removeClass("playerCharacter").addClass("userChoice");
         $(".playerCharacter").not(this).appendTo($("#pickOpponentChar"));
         $(".playerCharacter").not(this).removeClass("playerCharacter").addClass("pickOpponentChar");
-        // $(".playerCharacter").on("click", function(event){
-        //     event.stopPropogation();
-        // })
-        //    $(".playerCharacter").click(function(event) {
-        //        event.stopPropogation();
-        //    })
+
     });
 
-    
-    //$(".pickOpponentChar").click(function () {
+    //pick opponent and move that to the opppnent player deck & leave other possible opponents for later choice
     $("#pickOpponentChar").on("click", ".pickOpponentChar", function () {
-        $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));       
+        $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));
     });
 
 
