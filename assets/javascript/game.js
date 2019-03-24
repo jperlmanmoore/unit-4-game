@@ -40,17 +40,18 @@ $(document).ready(function () {
 
     var charArray = [leia, vader, trooper, kylo];
 
-    // $("#characters").prepend("<div id='pickInst'>Pick character</div>");
-    // $("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    $("#characters").prepend("<div id='pickInst'>Pick character</div>");
+    $("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
-    // $("#pickOpponentChar").prepend("<div id='pickInst2'>Pick opponent</div>");
-    // $("#pickInst2").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    $("#pickOpponentChar").prepend("<div id='pickInst2'>Pick opponent</div>");
+    $("#pickInst2").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
-    // $("#opponentChar").prepend("<div id='opponent'>Opponent</div>");
-    // $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    $("#opponentChar").prepend("<div id='opponent'>Opponent</div>");
+    $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
 
-    $(".playerCharacter").on("click", function () {
+//    $(".playerCharacter").on("click", function () {
+    $("#characters").on("click", ".playerCharacter", function () {
        $(this).removeClass("playerCharacter").addClass("userChoice");
         $(".playerCharacter").not(this).appendTo($("#pickOpponentChar"));
         $(".playerCharacter").not(this).removeClass("playerCharacter").addClass("pickOpponentChar");
@@ -62,7 +63,9 @@ $(document).ready(function () {
         //    })
     });
 
-    $(".pickOpponentChar").click(function () {
+    
+    //$(".pickOpponentChar").click(function () {
+    $("#pickOpponentChar").on("click", ".pickOpponentChar", function () {
         $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));       
     });
 
