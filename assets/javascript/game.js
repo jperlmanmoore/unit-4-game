@@ -50,17 +50,30 @@ $(document).ready(function () {
     // $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
 
-    $("#characters .playerCharacter").click(function () {
-       $("#characters .playerCharacter").not(this).appendTo($("#pickOpponentChar"));
-       $("#characters .playerCharacter").not(this).removeClass("playerCharacter");
-       console.log( $("#characters .playerCharacter").not(this))
-    }); 
+    $(".playerCharacter").on("click", function () {
+       $(this).removeClass("playerCharacter").addClass("userChoice");
+        $(".playerCharacter").not(this).appendTo($("#pickOpponentChar"));
+        $(".playerCharacter").not(this).removeClass("playerCharacter").addClass("pickOpponentChar");
+        // $(".playerCharacter").on("click", function(event){
+        //     event.stopPropogation();
+        // })
+        //    $(".playerCharacter").click(function(event) {
+        //        event.stopPropogation();
+        //    })
+    });
 
-    $("#pickOpponentCard .charactercard").click(function () {
-        $(this).appendTo($("#opponentChar"));
-    }); 
+    $(".pickOpponentChar").click(function () {
+        $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));       
+    });
 
-     
+
+    //give players their stats at start
+    //if there is a userChoice and an opponentChar, then need them to fight,
+    //if userChoice is not defeated, then
+    //1x or 2x - when that fight is done pick a new opponentChar, then need them to fight,
+    //when all fight are done - display if userChoice won or lost
+    //play some music is a bonus
+
 
     // $("#leia").on("click", function () {
     //     console.log("Leia was clicked!");
@@ -78,7 +91,7 @@ $(document).ready(function () {
     //     console.log("kylo was clicked!");
     // });
 
-    
+
 
 });
 
