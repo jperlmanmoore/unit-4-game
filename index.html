@@ -17,23 +17,28 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" tyoe="text/css" href="assets/css/reset.css">
+    
 
 </head>
 
 <body>
 
     <div class="jumbotron jumbotron-fluid bg-dark">
-        <div class="container">
+        <div class="container1">
             <h1 class="display-1 text-center text-warning" style="font-family:'Luckiest Guy', cursive;">STAR WARS RPG
             </h1>
-            <p class="lead text-white" style="font-family: 'Open Sans Condensed', sans-serif;">“The garbage’ll do!” — Rey</p>
+            <p class="lead text-white text-center" style="font-family: 'Open Sans Condensed', sans-serif;">“The garbage’ll do!” — Rey</p>
+            <button id="restart"class=class='ml-3 text-center bg-dark text-warning align-center' style="border: none; height: 50px; width: 50px; font-size: 20px; font-family: 'Open Sans Condensed', 'sans-serif'">restart</button>
             
+            <button id='fight' class='ml-3 text-center bg-dark text-warning align-center' style="border: none; height: 50px; width: 50px; font-size: 20px; font-family: 'Open Sans Condensed', 'sans-serif'">Fight!</button>
+        <!--fight button should be centered-->
         </div>
     </div>
 
     <div class="container">
 
         <div class="card-deck" id="characters">
+            <!--
             <div class="card charactercard playerCharacter " id="leia" style="max-width: 250px; max-height: 400px">
                 <img class="card-img-top" src="assets/images/leia2.jpg" alt="leia">
                 <div class="card-body">
@@ -69,7 +74,7 @@
                     <p class="card-text text-center" style="font-family: 'Open Sans Condensed', sans-serif;">HP: 180  AP: 7  CAP: 20</p>
                 </div>
             </div>
-
+        -->
         </div>
 
         <br>
@@ -104,12 +109,12 @@
         -
 
 -->
-
-        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-           
-        <script src = "assets/javascript/game.js"></script>
         
     </div>
 </body>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+           
+<script src = "assets/javascript/game.js"></script>
 
 </html>

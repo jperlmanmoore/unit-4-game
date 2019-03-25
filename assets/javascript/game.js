@@ -1,231 +1,170 @@
-//1. start with all chars in first array & generate/show stats at bottom of card
-//2. pick the character and keep that one in the pickUserCharArray & move others to the pickOpponentCharArry
-//3. from the pick OpponentArray, choose the frist opponent & move the first opponent to currentOpponentArray
-//4. do battle between userChar and opponentChar
-//5. pick second opponentChar & move to currentOppoentArray
-//6. pick thirs opponentChar & move to currentOpponentArray
-//7. action between user and opponents
-//8. show win or lose
-//9. restart game
-
 $(document).ready(function () {
 
     let characters = {
-    "leia": {
-        name: "leia",
-        attackPower: 8,
-        healthPoints: 120,
-        counterAttackPower: 15,
+        "leia": {
+            name: "leia",
+            attackPower: 8,
+            healthPoints: 120,
+            counterAttackPower: 15,
         },
 
-    "vader": {
-        name: "vader",
-        attackPower: 14,
-        healthPoints: 100,
-        counterAttackPower: 5,
+        "vader": {
+            name: "vader",
+            attackPower: 14,
+            healthPoints: 100,
+            counterAttackPower: 5,
         },
 
-    "trooper": {
-        name: "trooper",
-        attackPower: 8,
-        healthPoints: 150,
-        counterAttackPower: 20,
+        "trooper": {
+            name: "trooper",
+            attackPower: 8,
+            healthPoints: 150,
+            counterAttackPower: 20,
         },
 
-    "kylo": {
-        name: "kylo",
-        attackPower: 7,
-        healthPoints: 180,
-        counterAttackPower: 20,
+        "kylo": {
+            name: "kylo",
+            attackPower: 7,
+            healthPoints: 180,
+            counterAttackPower: 20,
         }
     };
 
-    $("#characters").prepend("<div id='pickInst'>Pick character</div>");
-    $("#pickInst").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    $("#characters").prepend("<div class='pick'>Pick character</div>");
+    $(".pick").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    //needs to disappear after user player is picked & change to say player
 
-    $("#pickOpponentChar").prepend("<div id='pickInst2'>Pick opponent</div>");
-    $("#pickInst2").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    $("#pickOpponentChar").prepend("<div class='pick'>Pick opponent</div>");
+    $(".pick").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    //needs to disappear when opponent is picked, but reappear when a second opponent needs to be picked
 
-    $("#opponentChar").prepend("<div id='opponent'>Opponent</div>");
-    $("#opponent").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    $("#opponentChar").prepend("<div class='pick'>Opponent</div>");
+    $(".pick").css("font-family", 'Open Sans Condensed', 'sans-serif');
 
-
-    var characterObj;
-    var opponentObj;
-
-    var fightRound = 1;
-
-    //pick player character & move other characters to pick opponent deck
-    $("#characters").on("click", ".playerCharacter", function () {
-        $(this).removeClass("playerCharacter").addClass("userChoice");
-        $(".playerCharacter").not(this).appendTo($("#pickOpponentChar"));
-        $(".playerCharacter").not(this).removeClass("playerCharacter").addClass("pickOpponentChar");
-        $("#characters").append("<button id='fight' class='ml-3' style='height: 50px; width: 50px; font-size: 20px'>Fight!</button>");
-        $("#fight").css("font-family", 'Open Sans Condensed', 'sans-serif');
-        var userChoiceId = $(this).attr("id");
-        characterObj = characters[userChoiceId];
-        $("#characters").append("<div id='userStats' class='ml-3' font-size: 30px'> <p>Attack Power: "+characterObj.attackPower+"</p> <p>Health Points: " +characterObj.healthPoints+ "</p> </div>");
-        $("#userStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
-    });
-
-    $("#characters").on("click", "#fight", function () {
-        
-       opponentObj.healthPoints = opponentObj.healthPoints - characterObj.attackPower;
-       characterObj.healthPoints = characterObj.healthPoints - opponentObj.counterAttackPower;
-       $("#userStats").html("<p>Attack Power: "+characterObj.attackPower+"</p> <p>Health Points: " +characterObj.healthPoints+ "</p>");
-       $("opponentStats").html("<p>Health Points: " +opponentObj.healthPoints+ "</p> <p>Counter Attack Power: "+opponentObj.counterAttackPower+"</p>");
-       fightRound++;
-       characterObj.attackPower = characterObj.attackPower * 2;
-    });
-
-    //pick opponent and move that to the opppnent player deck & leave other possible opponents for later choice
-    $("#pickOpponentChar").on("click", ".pickOpponentChar", function () {
-        $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));
-        var userChoiceId = $(this).attr("id");
-        opponentObj = characters[userChoiceId];
-        $("#opponentChar").append("<div id='opponentStats' class='ml-3' font-size: 30px'> <p>Health Points: " +opponentObj.healthPoints+ "</p> <p>Counter Attack Power: "+opponentObj.counterAttackPower+"</p> </div>");
-        $("#opponentStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
-    });
 
 
     
-    //if there is a userChoice and an opponentChar, then need them to fight,
-    //if userChoice is not defeated, then
-    //1x or 2x - when that fight is done pick a new opponentChar, then need them to fight,
-    //when all fight are done - display if userChoice won or lost
-    //play some music is a bonus
+    var characterObj;
+    var opponentObj;
+    var fightRound = 1;
+    var gameMode = "not-started";
+
+    initGameMode();
+
+    $("#restart").click (function () {
+        initGameMode();
+    });
+
+    $("#characters").on("click", ".playerCharacter", function () {
+        $(this).removeClass("playerCharacter").addClass("userChoice");
+        console.log(this);
+        $(".playerCharacter").not(this).appendTo($("#pickOpponentChar"));
+        $(".playerCharacter").not(this).removeClass("playerCharacter").addClass("pickOpponentChar");
+       
+        var userChoiceId = $(this).attr("id");
+        characterObj = characters[userChoiceId];
+        $("#characters").append("<div id='userStats' class='pl-5 ml-5 font-size: 30px'> <p>Attack Power: " + characterObj.attackPower + "</p> <p>Health Points: " + characterObj.healthPoints + "</p> </div>");
+        $("#userStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
+    });
+
+    
+    $("#pickOpponentChar").on("click", ".pickOpponentChar", function () {
+        if (gameMode === "not-started") {
+            gameMode = "started";
+            $(this).removeClass("pickopponentChar").addClass("opponentChar").appendTo($("#opponentChar"));
+            var userChoiceId = $(this).attr("id");
+            opponentObj = characters[userChoiceId];
+            $("#opponentChar").append("<div id='opponentStats' class='ml-3' font-size: 30px'> <p>Health Points: " + opponentObj.healthPoints + "</p> <p>Counter Attack Power: " + opponentObj.counterAttackPower + "</p> </div>");
+            $("#opponentStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
+        //if an opponentChar is picked, then don't allow a new one to be picked until opponentChar is defeated
+        }
+    });
+    
+
+    $("#fight").click(function () {
+        if (fightRound === 1) {
+            characterObj.baseAttackPower = characterObj.attackPower;
+        }
+        opponentObj.healthPoints = opponentObj.healthPoints - characterObj.attackPower;
+        characterObj.healthPoints = characterObj.healthPoints - opponentObj.counterAttackPower;
+        characterObj.attackPower = characterObj.attackPower + characterObj.baseAttackPower;
+        $("#userStats").html("<p>Attack Power: " + characterObj.attackPower + "</p> <p>Health Points: " + characterObj.healthPoints + "</p>");
+        $("#opponentStats").html("<p>Health Points: " + opponentObj.healthPoints + "</p> <p>Counter Attack Power: " + opponentObj.counterAttackPower + "</p>");
+        fightRound++;
+        if (characterObj.healthPoints <= 0) {
+            $("#characters").append("<div id='winorlose' class='ml-3' style='height: 50px; width: 50px; font-size: 20px'> 'You Lose!' </div>");
+            $("#restart").show();
+
+            gameMode = "not-started";
+        }
+        else if (opponentObj.healthPoints <= 0) {
+            $("#characters").append("<div id='winorlose' class='ml-3' style='height: 50px; width: 50px; font-size: 20px'> 'You Win! Choose another opponent to fight!' </div>");
+            $("#opponentChar").html("");
+            gameMode = "not-started";
+        }
+    });
+    //need to fix the winlose message to only show once
+
+    function initGameMode() {
+        characters = {
+            "leia": {
+                name: "leia",
+                attackPower: 8,
+                healthPoints: 120,
+                counterAttackPower: 15,
+            },
+    
+            "vader": {
+                name: "vader",
+                attackPower: 14,
+                healthPoints: 100,
+                counterAttackPower: 5,
+            },
+    
+            "trooper": {
+                name: "trooper",
+                attackPower: 8,
+                healthPoints: 150,
+                counterAttackPower: 20,
+            },
+    
+            "kylo": {
+                name: "kylo",
+                attackPower: 7,
+                healthPoints: 180,
+                counterAttackPower: 20,
+            }
+        };
+        fightRound = 1;
+        var $container = $("#characters");
+        $container.html("");
+        $("#pickOpponentChar").html("");
+        $("#opponentChar").html("");
+
+        var c = characters["leia"];
+        addCharacter($container, c.name, c.attackPower, c.healthPoints, c.counterAttackPower, "leia2.jpg");
+        c = characters["vader"];
+        addCharacter($container, c.name, c.attackPower, c.healthPoints, c.counterAttackPower, "vader2.jpg");
+        c = characters["trooper"];
+        addCharacter($container, c.name, c.attackPower, c.healthPoints, c.counterAttackPower, "trooper.jpg");
+        c = characters["kylo"];
+        addCharacter($container, c.name, c.attackPower, c.healthPoints, c.counterAttackPower, "kylo.jpg");
+        $("#restart").hide();
+        gameMode = "not-started";
+    }
+
+    function addCharacter($container, name, attackPower, healthPoints, counterAttackPower, imgurl) {
+       $container.append("<div class='card-deck' id='characters'>" + 
+       "<div class='card charactercard playerCharacter' id='" + name +"' style='max-width: 250px; max-height: 400px'>" +
+           "<img class='card-img-top' src='assets/images/" + imgurl +"' alt='" + name +"'>" +
+           "<div class='card-body'>" +
+               "<p class='card-text text-center' style='font-family: 'Open Sans Condensed', sans-serif;>" + name + "</p>" +
+                   "<p class='card-text text-center' style='font-family: 'Open Sans Condensed', sans-serif;'>HP: " + healthPoints + " AP: " + attackPower + " CAP: " + counterAttackPower + "</p>" +
+           "</div>" +
+       "</div>" 
+       );
+    }
 
 
-    // $("#leia").on("click", function () {
-    //     console.log("Leia was clicked!");
-    // });
-
-    // $("#vader").on("click", function () {
-    //     console.log("Maul was clicked!");
-    // });
-
-    // $("#trooper").on("click", function () {
-    //     console.log("trooper was clicked!");
-    // });
-
-    // $("#kylo").on("click", function () {
-    //     console.log("kylo was clicked!");
-    // });
-
-
-
+    
 });
-
-
-
-
-
-// var myDiv2Para = $('#myDiv2>p').detach();
-// myDiv2Para.appendTo('#myDiv2');
-
-
-
-
-
-// $(".charactercard").click(function() {
-//     $(".charactercard").not(this).detatch;
-//     $(this).append(pickOpponentCharArray);
-//     })
-
-// var attackPower = 0;
-// var healthPoints = 0;
-// var counterAttackPower = 0;
-// var userChar = []; //put the user choice in this array
-
-
-
-
-
-
-
-
-
-
-// var selectedElements = [1,2,3,4,5].splice(0,2);  in javascript
-// var targetArray = ['a', 'b', 'c'].concat(selectedElements);
-
-
-
-
-
-// $("pickUserChar").click(function() {
-//         $( this ).toggleClass( "off" );
-//       });
-//       var p;
-//       $( "button" ).click(function() {
-//         if ( p ) {
-//           p.appendTo( "body" );
-//           p = null;
-//         } else {
-//           p = $( "p" ).detach();
-//         }
-//       });
-
-//var new_array = old_array.concat([value1[, value2[, ...[, valueN]]]])  
-
-
-
-
-
-
-
-
-//$().appendTo( document.body ); //move the three to choose Opponent row
-
-// $('.searchbox-input').change( function () { //change to fire on click instead
-//     $('.card').show();
-//     var filter = $(this).val(); // get the value of the input, which we filter on
-//     $('.container').find(".card-title:not(:contains(" + filter + "))").parent().css('display','none');
-// });
-
-// Show all hidden divs using a slide down animation over 0.6 seconds
-//$( "div.hidden" ).slideDown( 600 );
-
-// Hide all paragraphs using a slide up animation over 0.8 seconds
-//$( "p" ).slideUp( 800 );
-
-
-
-//function userChooseOpponent() {}  //on click move the choice to the opponent array
-
-
-
-//function attackPower() {} //each character increases by its base on each attack
-
-//function counterAttack Power() {} //assign to enemy only & doesn't change
-
-//function healthPoints() {} //starts at amount and decreases
-
-
-
-
-//$(document).ready(function) {
-//gameOver = false;
-// .on("click", function()) {
-//if (!gameover) {
-//
-//}
-//}
-//}
-
-// to change the entire page
-//$("body".addClass("whatever class"); {
-//});
-
-//to toggle class
-// $( "span" ).click(function() {
-//     $( "li" ).each(function() {
-//       $( this ).toggleClass( "example" );
-//     });
-//   });
-
-
-//.keyup & .off("keyup")
-
-//position absolute - characters
-//position relative -- board
