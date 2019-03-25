@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    //character objects
     let characters = {
         "leia": {
             name: "leia",
@@ -30,18 +31,20 @@ $(document).ready(function () {
         }
     };
 
-
+    //global vars
     var characterObj;
     var opponentObj;
     var fightRound = 1;
     var gameMode = "not-started";
 
+    //game starting & restarting
     initGameMode();
 
     $("#restart").click(function () {
         initGameMode();
     });
 
+    //pick player & move other characters around
     $("#characters").on("click", ".playerCharacter", function () {
         $(this).removeClass("playerCharacter").addClass("userChoice");
         console.log(this);
@@ -54,7 +57,7 @@ $(document).ready(function () {
         $("#userStats").css("font-family", 'Open Sans Condensed', 'sans-serif');
     });
 
-
+    //pick opponent & move to opponent row
     $("#pickOpponentChar").on("click", ".pickOpponentChar", function () {
         if (gameMode === "not-started") {
             gameMode = "started";
@@ -67,7 +70,7 @@ $(document).ready(function () {
         }
     });
 
-
+//do the fighting
     $("#fight").click(function () {
         if (gameMode === "started") {
             if (fightRound === 1) {
@@ -93,6 +96,7 @@ $(document).ready(function () {
     });
     //need to fix the winlose message to only show once
 
+    //things to start the game with
     function initGameMode() {
         characters = {
             "leia": {
@@ -149,6 +153,7 @@ $(document).ready(function () {
         $(".pick").css("font-family", 'Open Sans Condensed', 'sans-serif');
     }
 
+    //add character information to the card divs
     function addCharacter($container, name, attackPower, healthPoints, counterAttackPower, imgurl) {
         $container.append("<div class='card-deck' id='characters'>" +
             "<div class='card charactercard playerCharacter' id='" + name + "' style='max-width: 250px; max-height: 400px'>" +
@@ -160,9 +165,5 @@ $(document).ready(function () {
             "</div>"
         );
     }
-
-
-
-
 
 });
