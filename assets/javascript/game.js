@@ -85,7 +85,6 @@ $(document).ready(function () {
             if (characterObj.healthPoints <= 0) {
                 $("#characters").append("<div id='winorlose' class='ml-3' style='height: 50px; width: 50px; font-size: 20px'> 'You Lose!' </div>");
                 $("#restart").show();
-
                 gameMode = "not-started";
             } else if (opponentObj.healthPoints <= 0) {
                 $("#characters").append("<div id='winorlose' class='ml-3' style='height: 50px; width: 50px; font-size: 20px'> 'You Win! Choose another opponent to fight!' </div>");
